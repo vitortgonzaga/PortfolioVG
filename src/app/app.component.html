@@ -6,7 +6,7 @@
       <p class="eyebrow">{{ isPt() ? 'Engenheiro de Software Backend' : 'Backend Software Engineer' }}</p>
     </div>
     <nav>
-      @for (item of [{id: 'home', pt: 'Home', en: 'Home'}, {id: 'projects', pt: 'Projetos', en: 'Projects'}, {id: 'exp', pt: 'Experiência', en: 'Experience'}, {id: 'stack', pt: 'Stack', en: 'Stack'}, {id: 'contact', pt: 'Contato', en: 'Contact'}]; track item.id) {
+      @for (item of [{id: 'home', pt: 'Sobre', en: 'About'}, {id: 'projects', pt: 'Projetos', en: 'Projects'}, {id: 'exp', pt: 'Experiência', en: 'Experience'}, {id: 'stack', pt: 'Stack', en: 'Stack'}, {id: 'contact', pt: 'Contato', en: 'Contact'}]; track item.id) {
         <a [href]="'#' + item.id" [class.active]="activeSection === item.id" (click)="selectSection(item.id); $event.preventDefault()"><span class="dot">●</span>{{ isPt() ? item.pt : item.en }}</a>
       }
     </nav>
@@ -25,6 +25,7 @@
 
   <div class="scroll">
     <section id="home" [class.visible]="activeSection === 'home'" class="home section">
+      <div class="section-title">{{ isPt() ? 'Sobre' : 'About' }}</div>
       <div class="request"><b>GET</b><span>/</span><em>· 200 OK</em></div>
       @if (isPt()) {
         <p class="lead">Construo o lado do software que ninguém vê e todo mundo sente: APIs, integrações e dados em produção.</p>
@@ -37,6 +38,7 @@
     </section>
 
     <section id="projects" [class.visible]="activeSection === 'projects'" class="projects section">
+      <div class="section-title">{{ isPt() ? 'Projetos' : 'Projects' }}</div>
       <div class="project-list"><div class="request"><b>GET</b><span>/projects</span><em>· 200 OK</em></div>
         @for (project of projects; track project.name) {
           <a [href]="project.link ?? '#'" [attr.target]="project.link ? '_blank' : null" [attr.rel]="project.link ? 'noopener' : null" [class.confidential]="project.status === 'confidential'" (click)="openProject(project, $event)">
@@ -47,17 +49,17 @@
       </div>
     </section>
 
-    <section id="exp" [class.visible]="activeSection === 'exp'" class="exp section"><div class="request"><b>GET</b><span>/experience</span><em>· 200 OK</em></div>
+    <section id="exp" [class.visible]="activeSection === 'exp'" class="exp section"><div class="section-title">{{ isPt() ? 'Experiência' : 'Experience' }}</div><div class="request"><b>GET</b><span>/experience</span><em>· 200 OK</em></div>
       @for (job of [{company:'LEVTY', pt:'Engenheiro de Software Trainee', en:'Software Engineer, Trainee', datePt:'Mar.2026 — presente', dateEn:'Mar.2026 — present', textPt:'Sistemas B2B de CRM, BPM e analytics: regras de negócio, automações de processo, integrações REST e buscas em Elasticsearch sobre grandes volumes.', textEn:'B2B CRM, BPM and analytics systems: business rules, process automation, REST integrations and Elasticsearch search across large datasets.'}, {company:'Multittech', pt:'Estágio em Desenvolvimento Backend', en:'Backend Development Intern', datePt:'Abr.2025 — Fev.2026', dateEn:'Apr.2025 — Feb.2026', textPt:'Arquitetura IoT de ingestão em tempo real em Python na AWS EC2 com persistência SQL e pipelines ETL que cortaram ~80% da entrada manual.', textEn:'Real-time IoT ingestion architecture in Python on AWS EC2 with SQL persistence and ETL pipelines that reduced manual data entry by ~80%.'}, {company:'eHealth Innovation Center', pt:'Pesquisador e Desenvolvedor', en:'Researcher & Developer', datePt:'Nov.2023 — Jan.2025', dateEn:'Nov.2023 — Jan.2025', textPt:'Solução assistiva de rastreamento ocular em Python e Dart (~92% de precisão), integrada a automação residencial para pacientes com ELA. Pesquisa publicada.', textEn:'Assistive eye-tracking solution in Python and Dart (~92% accuracy), integrated with home automation for ALS patients. Published research.'}]; track job.company) {
         <article><strong>{{ job.company }}</strong><small>{{ isPt() ? job.pt : job.en }} / {{ isPt() ? job.datePt : job.dateEn }}</small><p>{{ isPt() ? job.textPt : job.textEn }}</p></article>
       }
     </section>
 
-    <section id="stack" [class.visible]="activeSection === 'stack'" class="stack section"><div class="request"><b>GET</b><span>/stack</span><em>· 200 OK</em></div>
+    <section id="stack" [class.visible]="activeSection === 'stack'" class="stack section"><div class="section-title">Stack</div><div class="request"><b>GET</b><span>/stack</span><em>· 200 OK</em></div>
       @for (group of [{title: 'Backend', items: 'Java,Spring Boot,Python,APIs REST'}, {title: 'Databases', items: 'PostgreSQL,MongoDB,Redis,Elasticsearch,SQL'}, {title: 'Cloud & DevOps', items: 'AWS (EC2),Docker,CI/CD,GitHub Actions,Git,Linux'}, {title: 'Frontend', items: 'JavaScript,TypeScript,React,Next.js'}, {title: 'Languages', items: 'Advanced English,Native Portuguese'}]; track group.title) { <div class="stack-group"><label>{{ group.title }}</label><div>@for (item of group.items.split(','); track item) { <span>{{ item }}</span> }</div></div> }
     </section>
 
-    <section id="contact" [class.visible]="activeSection === 'contact'" class="contact section"><div class="request"><b>POST</b><span>/contact</span><em>· 200 OK</em></div><div class="social"><a href="https://www.linkedin.com/in/vitorgonzaga10/" target="_blank" aria-label="LinkedIn"><i class="ph-light ph-linkedin-logo"></i></a><a href="https://github.com/vitortgonzaga" target="_blank" aria-label="GitHub"><i class="ph-light ph-github-logo"></i></a><a href="https://wa.me/5512996732304" target="_blank" aria-label="WhatsApp"><i class="ph-light ph-whatsapp-logo"></i></a><a href="mailto:vitortgonzaga@icloud.com" aria-label="E-mail"><i class="ph-light ph-envelope-simple"></i></a></div><div class="mail">vitortgonzaga@icloud.com<button (click)="copyEmail()">{{ copied ? (isPt() ? 'copiado' : 'copied') : (isPt() ? 'copiar email' : 'copy email') }}</button></div></section>
+    <section id="contact" [class.visible]="activeSection === 'contact'" class="contact section"><div class="section-title">{{ isPt() ? 'Contato' : 'Contact' }}</div><div class="request"><b>POST</b><span>/contact</span><em>· 200 OK</em></div><div class="social"><a href="https://www.linkedin.com/in/vitorgonzaga10/" target="_blank" aria-label="LinkedIn"><i class="ph-light ph-linkedin-logo"></i></a><a href="https://github.com/vitortgonzaga" target="_blank" aria-label="GitHub"><i class="ph-light ph-github-logo"></i></a><a href="https://wa.me/5512996732304" target="_blank" aria-label="WhatsApp"><i class="ph-light ph-whatsapp-logo"></i></a><a href="mailto:vitortgonzaga@icloud.com" aria-label="E-mail"><i class="ph-light ph-envelope-simple"></i></a></div><div class="mail">vitortgonzaga@icloud.com<button (click)="copyEmail()">{{ copied ? (isPt() ? 'copiado' : 'copied') : (isPt() ? 'copiar email' : 'copy email') }}</button></div></section>
   </div>
 
   @if (modalOpen) { <div class="modal" (click)="modalOpen = false"><div class="modal-box" (click)="$event.stopPropagation()"><label>Confidential</label><p>{{ isPt() ? 'Este projeto foi desenvolvido internamente na Multittech Engenharia e o código é confidencial.' : 'This project was built in-house at Multittech Engenharia and the code is confidential.' }}</p><button (click)="modalOpen = false">ok</button></div></div> }
