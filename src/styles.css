@@ -1,0 +1,4 @@
+html, body { height: 100%; margin: 0; background: #0d0d0d; transition: background .4s; }
+html.theme-light, html.theme-light body { background: #e5e5e5; }
+* { box-sizing: border-box; }
+body { overflow: hidden; }
